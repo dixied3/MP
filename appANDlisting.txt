@@ -1,0 +1,93 @@
+The router knows it needs to handle routes related to listings because of how it is set up and used in the main application file (app.js). Here’s a step-by-step explanation:
+
+Step 1: Define Routes in the Router (listing.js)
+In listing.js, you create a router and define all the routes related to listings. This router is then exported from the file.
+
+javascript
+Copy code
+// listing.js
+const express = require('express');
+const router = express.Router();
+const Listing = require('../models/listing'); // Import the Listing model
+
+// Route to get all listings
+router.get("/", async (req, res) => {
+    const allListings = await Listing.find();
+    res.render("listings/index.ejs", { allListings });
+});
+
+// Route to get the form for creating a new listing
+router.get("/new", (req, res) => {
+    res.render("listings/new.ejs");
+});
+
+// Route to create a new listing
+router.post("/", async (req, res) => {
+    const newListing = new Listing(req.body.listing);
+    await newListing.save();
+    res.redirect("/listings");
+});
+
+// More routes can be defined similarly...
+
+module.exports = router; // Export the router
+Step 2: Import and Use the Router in the Main Application (app.js)
+In app.js, you import the router from listing.js and tell your Express app to use this router for all requests that start with /listings.
+
+javascript
+Copy code
+// app.js
+const express = require('express');
+const app = express();
+const path = require('path');
+const methodOverride = require('method-override');
+const mongoose = require('mongoose');
+const Listing = require('./models/listing'); // Import the Listing model
+const listings = require('./routes/listing'); // Import the listings router
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+
+// Set up view engine and views folder
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Database connection
+mongoose.connect('mongodb://127.0.0.1:27017/wanderlust', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => console.log("Database connected"))
+.catch(err => console.log("Database connection error:", err));
+
+// Use the listings router for all routes starting with /listings
+app.use('/listings', listings);
+
+// Start the server
+app.listen(3000, () => {
+    console.log('Serving on port 3000');
+});
+How It Works
+Router Definition:
+
+In listing.js, you define various routes using router.get, router.post, etc.
+These routes handle specific URL paths (e.g., /new, /, /edit).
+Router Export:
+
+The router is exported from listing.js using module.exports = router;.
+Router Import:
+
+In app.js, you import this router using const listings = require('./routes/listing');.
+Mounting the Router:
+
+You mount the router in app.js using app.use('/listings', listings);.
+This line tells Express: "For any request that starts with /listings, use the routes defined in the listings router."
+Example Requests
+Request to /listings:
+Express sees /listings and looks for a router that handles this path.
+It finds the listings router and uses the route defined as router.get("/") in listing.js.
+Request to /listings/new:
+Express sees /listings/new and looks for a router that handles this path.
+It finds the listings router and uses the route defined as router.get("/new") in listing.js.
+By importing and using the listings router in app.js, you instruct your application to delegate all requests that start with /listings to the routes defined in listing.js. This keeps your main application file clean and your routing logic organized.

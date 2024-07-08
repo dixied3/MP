@@ -1,0 +1,57 @@
+AUTHENTICATE : user ko login/sign-up karvana . 
+
+
+AUTHORIZE : to monotor which sections or which facilities can be availed or accessed by the user . 
+
+
+
+
+1) npm i passport-local-mongoose :
+        used especially for mongoose
+
+        * adds a username by default
+        and also the salt and hash . 
+
+
+2) npm i passport : Express mein usse hone wala middleware used for authentification purposes . 
+
+
+3) npm i passport-local : notusing any other app to sign-in like google etc. . 
+
+4) We need sessions with this concept 
+if user has logged in in some tab 
+and uses taht website or application in different tab then we the browser needs to know that this is the same session going - on not a new one
+and hence don't really need to ask for a login everytime the user uses different tab to operate in a web-application at the same time . 
+
+MIDDLEWARE    
+5) passport.session() : so that web application knows that the same user is sending page requests . 
+
+and we want user to login one time in one session . 
+
+6) passport.use(new LocalStrategy(User.authenticated())) : users should be authenticated via. local strategy .
+
+* User.authenticated() : used to authenticate users .
+
+
+7) passport.authenticate('local' , {failureRedirect : '/login' , failureFlash : true})
+
+* failureFlash : true
+we'll get a messege ehy failed authentication 
+
+8) req.isAuthenticated() :  Jis user ki info. current session mei stored h IS THE USER AUTHENTICATED 
+
+PASSPORT OBJECT IS STORING USER INFO . 
+if it's undefined then no user is there
+
+
+9) <% if (!req.user) { %>
+              <a class="nav-link" href="/signup">Sign Up</a>
+              <a class="nav-link" href="/login">Login</a>
+          <% } %>
+          <% if (req.user) { %>
+              <a class="nav-link" href="/logout">Log Out</a>
+          <% } %>
+      </div>
+
+
+we cannot access req directly in the ejs template . 
