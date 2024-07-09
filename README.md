@@ -15,7 +15,7 @@ Wanderlust highlights my skills in full-stack development, user experience desig
 - **Database:** MongoDB as a NoSQL database, integrated with Mongoose for efficient data modeling and management.
 - **Authentication and Authorization:** Implemented using Passport.js with OAuth2.0 protocols for secure user authentication and role-based access control (RBAC), employing the PBKDF2 hashing algorithm for password security.
 - **Cloud Services:** Leveraging Cloudinary for seamless storage and optimized delivery of media assets.
-- **Maps Integration:** Utilizing Mapbox to spatially visualize property locations with dynamic mapping by loacting the entered loaction on map and displaying it for ease.
+- **Maps Integration:** Utilizing Mapbox GL JS client-side JavaScript library for building web maps and web applications with Mapbox's modern mapping technology to spatially visualize property locations with dynamic mapping by loacting the entered loaction on map and displaying it for ease .
 
 ## Key Features
 
