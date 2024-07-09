@@ -1,4 +1,4 @@
-# Airbnb Clone Project
+# Wanderlust - Vacation Rental Platform(Airbnb inspired)
 
 This web application replicates the comprehensive functionality of Airbnb, enabling users to effortlessly list their properties for hosting while offering visitors an intuitive platform to explore and reserve these accommodations.
 
