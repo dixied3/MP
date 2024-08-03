@@ -1,6 +1,22 @@
 <% layout("/layouts/boilerplate") %>
 
+<style>
+    .show-btn-cont {
+        display: flex;
+    justify-content: space-between;
+    width: 100%;
+    }
 
+    .btn-left {
+        align-self: flex-start;
+    }
+    
+    .btn-right {
+        align-self: flex-end;
+        color: #e95f68;
+    }
+    
+</style>
 
 <div class="row mt-3">
     <h1 class="col-6 offset-3">Login</h1>
@@ -23,7 +39,12 @@
                 </label>
                 <input type="password" name="password" id="password" class="form-control" required>
             </div>
-            <button class="btn btn-success">Login</button>
+            
+            <div class="mt-5 show-btn-cont">
+                <button class="btn btn-success btn-left">Login</button>
+                <a href="/reset" class="btn-right">Forgot Password?</a>
+            </div>
+
 
         </form>
     </div>

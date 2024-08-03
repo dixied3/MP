@@ -29,7 +29,16 @@ router
 
 
 
-router.get("/logout" , userController.logout)
+router.get("/logout" , userController.logout) ; 
+
+router
+    .route("/reset")
+    .get(userController.renderResetForm) 
+    .post(wrapAsync(userController.reset)) ; 
+
+router.route("/reset/:token")
+    .get(wrapAsync(userController.renderNewPassForm))
+    .post(wrapAsync(userController.setNewPass)) ; 
 
 
 module.exports = router;
